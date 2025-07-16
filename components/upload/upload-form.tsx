@@ -9,6 +9,7 @@ import {
   storePdfSummaryAction,
 } from "@/actions/upload-actions";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   file: z
@@ -27,6 +28,7 @@ export default function UploadForm() {
   const { toast, error } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
     onClientUploadComplete: () => {
       console.log("Uploaded successfully!");
@@ -106,6 +108,7 @@ export default function UploadForm() {
           });
 
           formRef.current?.reset();
+          router.push(`/summaries/${storeResult.data.id}`);
         }
       }
 
@@ -114,6 +117,8 @@ export default function UploadForm() {
       setIsLoading(false);
       console.error("Error occurred:", error);
       formRef.current?.reset();
+    } finally {
+      setIsLoading(false);
     }
   };
 
