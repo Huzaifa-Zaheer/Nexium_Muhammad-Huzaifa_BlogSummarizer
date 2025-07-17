@@ -37,8 +37,8 @@ export default function UploadForm() {
       console.error("Error occurred while uploading", err);
       error("❌ Error occurred while uploading", err.message);
     },
-    onUploadBegin: ({ file }) => {
-      console.log("Upload has begun for", file);
+    onUploadBegin: (data) => {
+      console.log("Upload has begun for", data);
     },
   });
 
@@ -69,8 +69,8 @@ export default function UploadForm() {
         description: "Hold tight, We are uploading your PDF!✨",
       });
 
-      const resp = await startUpload([file]);
-      if (!resp) {
+      const uploadResponse = await startUpload([file]);
+      if (!uploadResponse) {
         toast({
           title: "Something went wrong",
           description: "Please use a different file",
@@ -84,7 +84,10 @@ export default function UploadForm() {
         title: "📃 Processing PDF",
         description: "Hold tight, Our AI is reading through your document!✨",
       });
-      const result = await generatePdfSummary(resp);
+      const result = await generatePdfSummary({
+        fileUrl: uploadResponse[0].serverData.fileUrl,
+        fileName: file.name,
+      });
       const { data = null, message = null } = result || {};
 
       if (data) {
@@ -93,18 +96,18 @@ export default function UploadForm() {
           title: "📃 Saving PDF",
           description: "Hang tight, We are saving your summary!✨",
         });
-        
 
         if (data.summary) {
           storeResult = await storePdfSummaryAction({
             summary: data.summary,
-            fileUrl: resp[0].serverData.file.ufsUrl,
+            fileUrl: uploadResponse[0].serverData.fileUrl,
             title: data.title,
             fileName: file.name,
           });
           toast({
             title: "✨ Summary Generated",
-            description: "Your PDF has been successfully summarized and saved!✨",
+            description:
+              "Your PDF has been successfully summarized and saved!✨",
           });
 
           formRef.current?.reset();
@@ -112,7 +115,7 @@ export default function UploadForm() {
         }
       }
 
-      console.log("Upload response:", resp);
+      console.log("Upload response:", uploadResponse);
     } catch (error) {
       setIsLoading(false);
       console.error("Error occurred:", error);

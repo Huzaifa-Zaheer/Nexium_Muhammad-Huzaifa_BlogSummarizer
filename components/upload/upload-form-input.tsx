@@ -23,8 +23,9 @@ export const UploadFormInput = forwardRef<
           type="file"
           name="file"
           accept="application/pdf"
-          required={cn(isLoading && "opacity-50 cursor-not-allowed")}
+          required
           disabled={isLoading}
+          className={cn(isLoading && "opacity-50 cursor-not-allowed")}
         />
         <Button
           disabled={isLoading}

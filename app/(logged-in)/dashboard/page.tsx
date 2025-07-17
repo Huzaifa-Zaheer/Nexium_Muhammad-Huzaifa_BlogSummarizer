@@ -10,7 +10,10 @@ import EmptySummaryState from "@/components/summaries/empty-summary-state";
 
 export default async function DashboardPage() {
   const user = await currentUser();
-  const userId = user?.id;
+  if (!user?.id) {
+    return redirect("/sign-in");
+  }
+  const userId = user.id;
   if (!user?.id) {
     return redirect("/sign-in");
   }
