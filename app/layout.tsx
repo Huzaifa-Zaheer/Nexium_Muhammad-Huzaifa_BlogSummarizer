@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   title: "SnapSummary - Blog & PDF Summarizer | AI-Powered Article Summaries",
   description:
     "SnapSummary is an AI-powered web app for summarizing blogs, articles, and PDF documents. Instantly get concise, SEO-friendly summaries to save time and boost productivity.",
+  openGraph: {
+    images: [
+      {url: '/opengrapgh-image.png',},
+    ],
+  },
+  metadataBase: new URL(ORIGIN_URL),
+  alternates: {
+    canonical: ORIGIN_URL,
+  },
 };
 
 export default function RootLayout({
