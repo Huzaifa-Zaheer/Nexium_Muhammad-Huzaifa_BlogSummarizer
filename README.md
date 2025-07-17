@@ -1,3 +1,11 @@
+# SnapSummary 📄✨  
+Summarize your PDFs with AI in seconds.
+
+🔗 **Live Site**: [SnapSummary on Vercel](https://nexium-muhammad-huzaifa-blog-muhammad-huzaifa-zaheers-projects.vercel.app/)
+
+---
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
