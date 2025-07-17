@@ -18,14 +18,16 @@ export const containerVariants = {
 };
 
 export const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 50,
-      duration: 0.8,
+      type: "tween" as const,
+      duration: 0.3,
     },
   },
 };
