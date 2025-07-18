@@ -5,6 +5,7 @@ import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { ORIGIN_URL } from "@/utils/helpers";
 
 const fontSans = FontSans({
   variable: "--font-sans",
@@ -17,9 +18,7 @@ export const metadata: Metadata = {
   description:
     "SnapSummary is an AI-powered web app for summarizing blogs, articles, and PDF documents. Instantly get concise, SEO-friendly summaries to save time and boost productivity.",
   openGraph: {
-    images: [
-      {url: '/opengrapgh-image.png',},
-    ],
+    images: [{ url: "/opengrapgh-image.png" }],
   },
   metadataBase: new URL(ORIGIN_URL),
   alternates: {
