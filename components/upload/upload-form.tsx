@@ -70,10 +70,15 @@ export default function UploadForm() {
       });
 
       const uploadResponse = await startUpload([file]);
-      if (!uploadResponse) {
+      if (
+        !uploadResponse ||
+        !uploadResponse[0] ||
+        !uploadResponse[0].serverData ||
+        !uploadResponse[0].serverData.fileUrl
+      ) {
         toast({
           title: "Something went wrong",
-          description: "Please use a different file",
+          description: "File upload failed. Please try again.",
           variant: "destructive",
         });
         setIsLoading(false);
