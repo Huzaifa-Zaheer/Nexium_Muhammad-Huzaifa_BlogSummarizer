@@ -15,7 +15,7 @@ import { containerVariants, itemVariants } from "@/utils/constants";
 const buttonVariants = {
   scale: 1.05,
   transition: {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 300,
     damping: 10,
   },
